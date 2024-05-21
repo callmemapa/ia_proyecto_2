@@ -1,4 +1,3 @@
-# Tamaño del tablero (8x8)
 BOARD_SIZE = 8
 
 # Movimientos posibles del caballo en ajedrez
@@ -18,4 +17,3 @@ def get_possible_moves(board, position):
 
 def is_valid_move(board, row, col):
     return 0 <= row < BOARD_SIZE and 0 <= col < BOARD_SIZE and board[row][col] == ' '
-

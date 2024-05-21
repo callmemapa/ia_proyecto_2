@@ -41,7 +41,6 @@ def main():
     max_depth = depth_levels.get(level, 2)
 
     current_player = 'G'
-    current_position = yoshi_green_pos
     yoshi_positions = {'G': yoshi_green_pos, 'R': yoshi_red_pos}
 
     running = True
@@ -58,7 +57,7 @@ def main():
         
         if current_player == 'G':
             print("Turno de Yoshi verde (computadora):")
-            current_position = best_move(board, current_position, 'G', max_depth)
+            current_position = best_move(board, yoshi_positions['G'], 'G', max_depth)
             if current_position:
                 apply_move(board, current_position, 'G')
                 yoshi_positions['G'] = current_position
