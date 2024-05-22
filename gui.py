@@ -15,7 +15,9 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
 yoshi_green_image = pygame.image.load("./images/green_yoshi.png")
+yoshi_green_image = pygame.transform.scale(yoshi_green_image, (CELL_SIZE, CELL_SIZE))  # Escalar la imagen al tamaño de la celda
 yoshi_red_image = pygame.image.load("./images/red_yoshi.png")
+yoshi_red_image = pygame.transform.scale(yoshi_red_image, (CELL_SIZE, CELL_SIZE))  # Escalar la imagen al tamaño de la celda
 
 def draw_text(screen, text, position, font_size=30, color=BLACK):
     font = pygame.font.Font(None, font_size)
@@ -45,15 +47,7 @@ def select_difficulty(screen):
                     level = 3
     return level
 
-def main():
-    pygame.init()
-    screen = pygame.display.set_mode((WINDOW_SIZE, WINDOW_SIZE))
-    pygame.display.set_caption('Yoshi\'s World')
-    
-    level = select_difficulty(screen)
-    depth_levels = {1: 2, 2: 4, 3: 6}
-    max_depth = depth_levels.get(level, 2)
-
+def game_loop(screen, max_depth):
     board = create_board()
     
     # Generar posiciones iniciales aleatorias para los Yoshis
@@ -78,7 +72,7 @@ def main():
 
         screen.fill(WHITE)
         draw_board(screen, board, CELL_SIZE)
-        draw_pieces(screen, board, CELL_SIZE)
+        draw_pieces(screen, board, CELL_SIZE, yoshi_green_image, yoshi_red_image, yoshi_positions['G'], yoshi_positions['R'])
 
         if not game_over:
             if current_player == 'G':
@@ -121,7 +115,7 @@ def main():
 
         screen.fill(WHITE)
         draw_board(screen, board, CELL_SIZE)
-        draw_pieces(screen, board, CELL_SIZE)
+        draw_pieces(screen, board, CELL_SIZE, yoshi_green_image, yoshi_red_image, yoshi_positions['G'], yoshi_positions['R'])
         pygame.display.flip()
 
         if game_over:
@@ -134,14 +128,25 @@ def main():
             draw_text(screen, f"Yoshi rojo pintó {red_tiles} casillas.", (10, WINDOW_SIZE // 2 - 30))
 
             if green_tiles > red_tiles:
-                draw_text(screen, "¡Yoshi verde, ha ganado la máquina!", (10, WINDOW_SIZE // 2), color=GREEN)
+                draw_text(screen, "¡Yoshi verde, gana la máquina!", (10, WINDOW_SIZE // 2), color=GREEN)
             elif red_tiles > green_tiles:
-                draw_text(screen, "¡Yoshi rojo, has ganado tú!", (10, WINDOW_SIZE // 2), color=RED)
+                draw_text(screen, "¡Yoshi rojo, ganas tú!", (10, WINDOW_SIZE // 2), color=RED)
             else:
                 draw_text(screen, "¡Es un empate!", (10, WINDOW_SIZE // 2), color=BLACK)
             
             pygame.display.flip()
-            pygame.time.wait(10000)
+            pygame.time.wait(5000)
             running = False
 
     pygame.quit()
+
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((WINDOW_SIZE, WINDOW_SIZE))
+    pygame.display.set_caption('Yoshi\'s World')
+    
+    level = select_difficulty(screen)
+    depth_levels = {1: 2, 2: 4, 3: 6}
+    max_depth = depth_levels.get(level, 2)
+    
+    game_loop(screen, max_depth)

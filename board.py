@@ -18,10 +18,14 @@ def draw_board(screen, board, cell_size):
             rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
             pygame.draw.rect(screen, (0, 0, 0), rect, 1)
 
-def draw_pieces(screen, board, cell_size):
-    for row in range(BOARD_SIZE):
-        for col in range(BOARD_SIZE):
-            if board[row][col] == 'G':
-                pygame.draw.circle(screen, (0, 255, 0), (col * cell_size + cell_size // 2, row * cell_size + cell_size // 2), cell_size // 3)
+def draw_pieces(screen, board, cell_size, yoshi_green_image, yoshi_red_image, yoshi_green_pos, yoshi_red_pos):
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            if (row, col) == yoshi_green_pos:
+                screen.blit(yoshi_green_image, (col * cell_size, row * cell_size))  # Ajuste de posición
+            elif (row, col) == yoshi_red_pos:
+                screen.blit(yoshi_red_image, (col * cell_size, row * cell_size))  # Ajuste de posición
+            elif board[row][col] == 'G':
+                pygame.draw.rect(screen, (0, 255, 0), (col * cell_size, row * cell_size, cell_size, cell_size))
             elif board[row][col] == 'R':
-                pygame.draw.circle(screen, (255, 0, 0), (col * cell_size + cell_size // 2, row * cell_size + cell_size // 2), cell_size // 3)
+                pygame.draw.rect(screen, (255, 0, 0), (col * cell_size, row * cell_size, cell_size, cell_size))
