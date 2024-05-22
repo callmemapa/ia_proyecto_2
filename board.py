@@ -1,6 +1,5 @@
 import pygame
 
-# Tamaño del tablero (8x8)
 BOARD_SIZE = 8
 
 def create_board():
@@ -13,10 +12,11 @@ def count_tiles(board, player):
     return sum(row.count(player) for row in board)
 
 def draw_board(screen, board, cell_size):
-    for row in range(BOARD_SIZE):
-        for col in range(BOARD_SIZE):
-            color = (255, 255, 255) if (row + col) % 2 == 0 else (0, 0, 0)
-            pygame.draw.rect(screen, color, pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size))
+    screen.fill((255, 255, 255))  # Llenar el fondo de blanco
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
+            pygame.draw.rect(screen, (0, 0, 0), rect, 1)
 
 def draw_pieces(screen, board, cell_size):
     for row in range(BOARD_SIZE):
