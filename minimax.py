@@ -11,7 +11,9 @@ def minimax(board, depth, is_maximizing, position, player, max_depth):
     if is_maximizing:
         best_score = float('-inf')
         for move in possible_moves:
-            new_board = [row[:] for row in board]
+            new_board = []
+            for row in board:
+                new_board.append(row[:])
             apply_move(new_board, move, player)
             score = minimax(new_board, depth + 1, False, move, player, max_depth)
             best_score = max(score, best_score)
@@ -19,7 +21,9 @@ def minimax(board, depth, is_maximizing, position, player, max_depth):
     else:
         best_score = float('inf')
         for move in possible_moves:
-            new_board = [row[:] for row in board]
+            new_board = []
+            for row in board:
+                new_board.append(row[:])
             apply_move(new_board, move, opponent)
             score = minimax(new_board, depth + 1, True, move, opponent, max_depth)
             best_score = min(score, best_score)
@@ -30,7 +34,9 @@ def best_move(board, position, player, max_depth):
     best_move = None
     possible_moves = get_possible_moves(board, position)
     for move in possible_moves:
-        new_board = [row[:] for row in board]
+        new_board = []
+        for row in board:
+            new_board.append(row[:])
         apply_move(new_board, move, player)
         score = minimax(new_board, 1, False, move, player, max_depth)
         if score > best_score:

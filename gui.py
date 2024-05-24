@@ -27,9 +27,9 @@ def draw_text(screen, text, position, font_size=30, color=BLACK):
 def select_difficulty(screen):
     screen.fill(WHITE)
     draw_text(screen, "Selecciona el nivel de dificultad:", (10, 10))
-    draw_text(screen, "1. Principiante (profundidad 2)", (10, 40))
-    draw_text(screen, "2. Amateur (profundidad 4)", (10, 70))
-    draw_text(screen, "3. Experto (profundidad 6)", (10, 100))
+    draw_text(screen, "1. Click en [1] para nivel principiante", (10, 40))
+    draw_text(screen, "2. Click en [2] para nivel amateur", (10, 70))
+    draw_text(screen, "3. Click en [3] para nivel experto", (10, 100))
     pygame.display.flip()
     
     level = None
@@ -124,15 +124,15 @@ def game_loop(screen, max_depth):
 
             # Mostrar pantalla de resultados
             screen.fill(WHITE)
-            draw_text(screen, f"Yoshi verde pintó {green_tiles} casillas.", (10, WINDOW_SIZE // 2 - 60))
-            draw_text(screen, f"Yoshi rojo pintó {red_tiles} casillas.", (10, WINDOW_SIZE // 2 - 30))
+            draw_text(screen, f"El Yoshi verde pintó {green_tiles} casillas.", (10, WINDOW_SIZE // 2 - 60))
+            draw_text(screen, f"El Yoshi rojo pintó {red_tiles} casillas.", (10, WINDOW_SIZE // 2 - 30))
 
             if green_tiles > red_tiles:
-                draw_text(screen, "¡Yoshi verde, gana la máquina!", (10, WINDOW_SIZE // 2), color=GREEN)
+                draw_text(screen, "¡El Yoshi verde, gana la máquina!", (10, WINDOW_SIZE // 2), color=GREEN)
             elif red_tiles > green_tiles:
-                draw_text(screen, "¡Yoshi rojo, ganas tú!", (10, WINDOW_SIZE // 2), color=RED)
+                draw_text(screen, "¡El Yoshi rojo, ganas tú!", (10, WINDOW_SIZE // 2), color=RED)
             else:
-                draw_text(screen, "¡Es un empate!", (10, WINDOW_SIZE // 2), color=BLACK)
+                draw_text(screen, "¡Es un empate, no gana ninguno!", (10, WINDOW_SIZE // 2), color=BLACK)
             
             pygame.display.flip()
             pygame.time.wait(5000)

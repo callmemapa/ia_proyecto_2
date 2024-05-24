@@ -12,7 +12,7 @@ def count_tiles(board, player):
     return sum(row.count(player) for row in board)
 
 def draw_board(screen, board, cell_size):
-    screen.fill((255, 255, 255))  # Llenar el fondo de blanco
+    screen.fill((255, 255, 255))
     for row in range(len(board)):
         for col in range(len(board[row])):
             rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
@@ -22,9 +22,9 @@ def draw_pieces(screen, board, cell_size, yoshi_green_image, yoshi_red_image, yo
     for row in range(len(board)):
         for col in range(len(board[row])):
             if (row, col) == yoshi_green_pos:
-                screen.blit(yoshi_green_image, (col * cell_size, row * cell_size))  # Ajuste de posición
+                screen.blit(yoshi_green_image, (col * cell_size, row * cell_size))
             elif (row, col) == yoshi_red_pos:
-                screen.blit(yoshi_red_image, (col * cell_size, row * cell_size))  # Ajuste de posición
+                screen.blit(yoshi_red_image, (col * cell_size, row * cell_size))
             elif board[row][col] == 'G':
                 pygame.draw.rect(screen, (0, 255, 0), (col * cell_size, row * cell_size, cell_size, cell_size))
             elif board[row][col] == 'R':
